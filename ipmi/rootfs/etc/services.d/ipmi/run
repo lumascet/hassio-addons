@@ -47,7 +47,7 @@ function discovery_config_publish() {
     .path = "\($discovery_prefix)/sensor/\(.id)" |
     .topic = "\(.path)/config" |
     .payload = {
-      name = "IPMI \(.name)",
+      name = "IPMI\(" ")\(.name)",
       stat_t: "\(.path)/state",
       uniq_id: "ipmi_\(.id)"
     } |
