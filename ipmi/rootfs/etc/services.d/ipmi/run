@@ -47,7 +47,7 @@ function discovery_config_publish() {
     .path = "\($discovery_prefix)/sensor/\(.id)" |
     .topic = "\(.path)/config" |
     .payload = {
-      name = "IPMI " + .name,
+      name = "IPMI \(.name)",
       stat_t: "\(.path)/state",
       uniq_id: "ipmi_\(.id)"
     } |
@@ -78,7 +78,6 @@ function discovery_state_publish() {
     map(parse_number) |
     to_object(["name", "value", "unit", "state"]) |
     select(.value != null) |
-    .name = "IPMI " + .name |
     .id = (.name | ascii_downcase | gsub("[^a-zA-Z0-9_-]"; "_")) |
     .topic = "\($discovery_prefix)/sensor/\(.id)/state" |
     @sh "-t \(.topic) -m \(.value)"
