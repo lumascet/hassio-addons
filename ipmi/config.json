@@ -13,11 +13,17 @@
     "/dev/ipmi0"
   ],
   "options": {
+    "host": localhost,
+    "user": null ,
+    "password": null,
     "interval": 5,
     "discovery_prefix": "homeassistant",
     "debug": false
   },
   "schema": {
+    "host": "str",
+    "user": "str" ,
+    "password": "str",
     "interval": "int(1,)",
     "discovery_prefix": "str",
     "debug": "bool"
