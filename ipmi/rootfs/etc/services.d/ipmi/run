@@ -49,7 +49,7 @@ function discovery_config_publish() {
     .payload = {
       name: .name ,
       state_topic: "\(.path)/state",
-      unique_id: "ipmi_\(.id)"
+      unique_id: .id
     } |
     if .unit != null then .payload.unit_of_meas = .unit else . end |
     @sh "-t \(.topic) -m \(.payload | @json)"
