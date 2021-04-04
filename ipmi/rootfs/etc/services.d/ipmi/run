@@ -43,7 +43,7 @@ function discovery_config_publish() {
     map(parse_number) |
     to_object(["name", "value", "unit", "state"]) |
     select(.value != null) |
-    .id = (.name | ascii_downcase | gsub("[^a-zA-Z0-9_-]"; "_")) |
+    .id = "ipmi_" + (.name | ascii_downcase | gsub("[^a-zA-Z0-9_-]"; "_")) |
     .path = "\($discovery_prefix)/sensor/\(.id)" |
     .topic = "\(.path)/config" |
     .payload = {
