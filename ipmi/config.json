@@ -13,9 +13,9 @@
     "/dev/ipmi0"
   ],
   "options": {
-    "host": localhost,
-    "user": null ,
-    "password": null,
+    "host": "",
+    "user": "" ,
+    "password": "",
     "interval": 5,
     "discovery_prefix": "homeassistant",
     "debug": false
