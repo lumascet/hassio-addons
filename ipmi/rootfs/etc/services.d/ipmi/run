@@ -55,6 +55,7 @@ function discovery_config_publish() {
     if .unit == "Volts" then .payload.unit_of_meas = "V" else . end |
     if .unit == "degrees C" then .payload.unit_of_meas = "°C" else . end |
     if .unit == "Amps" then .payload.unit_of_meas = "A" else . end |
+    if .unit == "Watts" then .payload.unit_of_meas = "W" else . end |
     @sh "-t \(.topic) -m \(.payload | @json)"
 
 QUERY
