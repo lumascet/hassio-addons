@@ -52,6 +52,7 @@ function discovery_config_publish() {
       unique_id: .id
     } |
     if .unit != null then .payload.unit_of_meas = .unit else . end |
+    if .unit == "Volts" then .payload.unit_of_meas = "V" else . end |
     @sh "-t \(.topic) -m \(.payload | @json)"
 
 QUERY
