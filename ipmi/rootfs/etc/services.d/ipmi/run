@@ -9,6 +9,9 @@ MQTT_HOST=$(bashio::services mqtt "host")
 MQTT_USER=$(bashio::services mqtt "username")
 MQTT_PASSWORD=$(bashio::services mqtt "password")
 INTERVAL=$(bashio::config 'interval')
+HOST=$(bashio::config 'host')
+USER=$(bashio::config 'user')
+PASSWORD=$(bashio::config 'password')
 DISCOVERY_PREFIX=$(bashio::config 'discovery_prefix')
 
 function ipmi_mqtt_publish() {
@@ -19,7 +22,7 @@ function ipmi_mqtt_publish() {
     args+=(-t)
   fi
 
-  ipmitool -c sdr | jq --arg discovery_prefix "$DISCOVERY_PREFIX" --raw-input --raw-output "$query" | xargs ${args[@]} mosquitto_pub -h "$MQTT_HOST" -u "$MQTT_USER" -P "$MQTT_PASSWORD" "$@"
+  ipmitool -I lanplus -H "$EXTERNAL_HOST" -U "$USER" -P "$PASSWORD" -c sdr | jq --arg discovery_prefix "$DISCOVERY_PREFIX" --raw-input --raw-output "$query" | xargs ${args[@]} mosquitto_pub -h "$MQTT_HOST" -u "$MQTT_USER" -P "$MQTT_PASSWORD" "$@"
 }
 
 function discovery_config_publish() {
